@@ -4,6 +4,8 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 from decimal import Decimal
+
+
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
@@ -11,22 +13,30 @@ def print_hi(name):
 
 # Press the green button in the gutter to run the script.
 def is_1(gou_shou_dian_all_right):
-    gou_shou_dian_all_right =False
+    gou_shou_dian_all_right = False
     pass
 
 
+def format_string(input_string):
+    return input_string.lower().replace(' ', '_')
+
+
+# 这个函数接受一个字母作为参数，并将字母转换为其在字母表中的顺序。如果给定的字母不是小写字母，函数会返回 `None`。
+def get_letter_order(letter):
+    alphabet = set("abcdefghijklmnopqrstuvwxyz")
+    if letter in alphabet:
+        return ord(letter) - ord("a") + 1
+    else:
+        return None
+
+
+# pyinstaller --name "二级市场购售电力销售CheckV1.0" --onefile
+# --hidden-import=openpyxl --hidden-import=wx --add-data="./report/check.py;./report/" ./MainWindow/MainWindow.py
 if __name__ == '__main__':
-    excel_list_file=[1,2,3]
-    for excel in excel_list_file:
-        # 在这里处理文件夹内所有的公司
-        print(excel_list_file.index(excel))
-
-
-
-
-
-
-
+    excel_list_file = [1, 2, "3"]
+    print(format_string("Full internet access"))
+    print(get_letter_order("t"))
+    print("3" in excel_list_file)
 
     # print_hi('PyCharm')
     # name ="（4）从省级以下电网企业购电（含趸售企业）"
@@ -47,8 +57,6 @@ if __name__ == '__main__':
     #     print(row)
     #     if str(row) == "3":
     #         break
-
-
 
     pass
 
