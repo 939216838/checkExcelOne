@@ -554,7 +554,7 @@ def diliubu(path, list_file_name, excel, counter):
     cell3 = sheet.cell(4, 2)
 
     # 取科目汇总表-本月
-    sheet, manual_table_name, workbook = get_workbook_sheet(path, list_file_name, "科目汇总表本月", "Sheet1", False,
+    sheet, manual_table_name, workbook = get_workbook_sheet(path, list_file_name, "科目汇总表本月", "科目汇总表查询", False,
                                                             True)
 
     corporation_row = get_corporation_row(sheet, cell3.value)
@@ -570,7 +570,7 @@ def diliubu(path, list_file_name, excel, counter):
     # 判断X10==（row，6）
 
     # 取科目汇总表-本年累计
-    sheet, manual_table_name, workbook = get_workbook_sheet(path, list_file_name, "科目汇总表本年累计", "Sheet1", False,
+    sheet, manual_table_name, workbook = get_workbook_sheet(path, list_file_name, "科目汇总表本年累计", "科目汇总表查询", False,
                                                             True)
 
     corporation_row = get_corporation_row(sheet, cell3.value)
