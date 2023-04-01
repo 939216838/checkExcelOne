@@ -35,13 +35,18 @@ def get_letter_order(letter):
 #pyinstaller --name "二级市场购售电力销售CheckV2.0x32" --onefile --hidden-import=openpyxl --hidden-import=wx --add-data="./report/check.py;./report/" ./MainWindow/MainWindow.py
 
 #pyinstaller --name "二级市场购售电力销售CheckV2.0.1-x32" --onefile --hidden-import=openpyxl --hidden-import=wx --add-data="./report/check.py;./report/" ./MainWindow/MainWindow.py
+#pyinstaller --name "二级市场购售电力销售CheckV2.0.2-x32" --onefile --hidden-import=openpyxl --hidden-import=wx --add-data="./report/check.py;./report/" ./MainWindow/MainWindow.py
 
 if __name__ == '__main__':
     excel_list_file = [1, 2, "3"]
     print(format_string("Full internet access"))
     print(get_letter_order("t"))
     print("3" in excel_list_file)
-
+    dan_jia_list = [373.08, "373.08", 373.09, "373.09", 373.10, "373.10", 373.1, "373.1", 373.11, "373.11", 373.12,
+                    "373.12", 386.7, "386.7"]
+    print("373.1" in dan_jia_list)
+    print(373.1 in dan_jia_list)
+    print("8.其他能源含从公司系统外购电" == "8.其他能源含从公司系统外购电")
     # print_hi('PyCharm')
     # name ="（4）从省级以下电网企业购电（含趸售企业）"
     # print(name.count("从省级以下电网企业购电"))

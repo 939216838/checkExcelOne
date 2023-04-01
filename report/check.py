@@ -144,9 +144,10 @@ def judge_tax_rate_and_unit_price(sheet, row, column, data_list, counter, workbo
         if cell.value in data_list:
             pass
         else:
+            # print(cell.value, "不在集合里")
             print("----在这里输出,判断税率和单价和预期不符合-----", cell.value)
             counter.er_ji_shi_chang = False
-        set_cell_to_red_no_save(cell)
+            set_cell_to_red_no_save(cell)
 
 
 def er_ji_shi_chang(path, list_file_name, excel, counter):
@@ -160,7 +161,8 @@ def er_ji_shi_chang(path, list_file_name, excel, counter):
     # 状态标记
     row_status = RowStatus("None")
     shui_lv_list = ["1%", "3%", "13%", 0.01, 0.03, 0.13]
-    dan_jia_list = [373.08, 373.09, "373.10", 373.11, 373.12, 373.1, 386.7]
+    dan_jia_list = [373.08, "373.08", 373.09, "373.09", 373.10, "373.10", 373.1, "373.1", 373.11, "373.11", 373.12,
+                    "373.12", 386.7, "386.7"]
 
     # 遍历所有行
     for row in range(8, max_row):
@@ -181,6 +183,10 @@ def er_ji_shi_chang(path, list_file_name, excel, counter):
 
         if value == "7.太阳能发电":
             row_status.status = "太阳能发电"
+            continue
+
+        if value == "8.其他能源含从公司系统外购电":
+            row_status.status = "None"
             continue
 
         if value.find("从省级以下电网企业购电") > -1:
@@ -240,11 +246,7 @@ def er_ji_shi_chang(path, list_file_name, excel, counter):
             judge_tax_rate_and_unit_price(sheet, row, 14, dan_jia_list, counter, workbook, route)
 
             # 判断下一行是不是全额上网
-            cell_2 = sheet.cell(row + 1, 2)
-            if cell_2.value == "8.其他能源含从公司系统外购电":
-                row_status.status = "None"
-                continue
-            pass
+
 
         elif row_status.status == "从省级以下电网企业购电":
             # 检查税率
@@ -254,6 +256,7 @@ def er_ji_shi_chang(path, list_file_name, excel, counter):
                 row_status.status = "None"
                 continue
             pass
+
     workbook.save(route)
     workbook.close()
     pass
@@ -554,7 +557,8 @@ def diliubu(path, list_file_name, excel, counter):
     cell3 = sheet.cell(4, 2)
 
     # 取科目汇总表-本月
-    sheet, manual_table_name, workbook = get_workbook_sheet(path, list_file_name, "科目汇总表本月", "科目汇总表查询", False,
+    sheet, manual_table_name, workbook = get_workbook_sheet(path, list_file_name, "科目汇总表本月", "科目汇总表查询",
+                                                            False,
                                                             True)
 
     corporation_row = get_corporation_row(sheet, cell3.value)
@@ -570,7 +574,8 @@ def diliubu(path, list_file_name, excel, counter):
     # 判断X10==（row，6）
 
     # 取科目汇总表-本年累计
-    sheet, manual_table_name, workbook = get_workbook_sheet(path, list_file_name, "科目汇总表本年累计", "科目汇总表查询", False,
+    sheet, manual_table_name, workbook = get_workbook_sheet(path, list_file_name, "科目汇总表本年累计",
+                                                            "科目汇总表查询", False,
                                                             True)
 
     corporation_row = get_corporation_row(sheet, cell3.value)
