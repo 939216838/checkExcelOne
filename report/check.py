@@ -417,7 +417,8 @@ def disanbu(path, list_file_name, excel, counter):
     for cell in cell_list:
         is_none(cell)
 
-    sheet = workbook.get_sheet_by_name("二级市场")
+    sheet, manual_table_name, workbook = get_workbook_sheet(path, list_file_name, excel, "二级市场", False,
+                                                            True)
     sheet: Worksheet
 
     max_row = sheet.max_row + 1
