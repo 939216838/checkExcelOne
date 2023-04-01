@@ -200,61 +200,60 @@ def er_ji_shi_chang(path, list_file_name, excel, counter):
                 counter.er_ji_shi_chang = False
                 print("----六、与成本费用表校验差     不是空")
 
-        match row_status.status:
-            case "shui_dian":
-                # 检查税率 tax rate
+        if row_status.status == "shui_dian":
+            # 检查税率 tax rate
 
-                judge_tax_rate_and_unit_price(sheet, row, 8, shui_lv_list, counter, workbook, route)
-                # 检查单价
-                judge_tax_rate_and_unit_price(sheet, row, 14, dan_jia_list, counter, workbook, route)
+            judge_tax_rate_and_unit_price(sheet, row, 8, shui_lv_list, counter, workbook, route)
+            # 检查单价
+            judge_tax_rate_and_unit_price(sheet, row, 14, dan_jia_list, counter, workbook, route)
 
-                # 判断下一行是不是核电,如果是  row_status.status 设置为None
-                he_dian = sheet.cell(row + 1, 2)
-                if he_dian.value.find("4.核电") > -1:
-                    row_status.status = "None"
-                    continue
+            # 判断下一行是不是核电,如果是  row_status.status 设置为None
+            he_dian = sheet.cell(row + 1, 2)
+            if he_dian.value.find("4.核电") > -1:
+                row_status.status = "None"
+                continue
 
-                pass
+            pass
 
-            case "太阳能发电":
-                if sheet.cell(row, 2).value.find("集中式光伏上网电量") > -1:
-                    continue
-                if sheet.cell(row, 2).value.find("分布式光伏上网电量") > -1:
-                    continue
-                if sheet.cell(row, 2).value.find("自发自用，余电上网") > -1:
-                    continue
+        elif row_status.status == "太阳能发电":
+            if sheet.cell(row, 2).value.find("集中式光伏上网电量") > -1:
+                continue
+            if sheet.cell(row, 2).value.find("分布式光伏上网电量") > -1:
+                continue
+            if sheet.cell(row, 2).value.find("自发自用，余电上网") > -1:
+                continue
 
-                if sheet.cell(row, 2).value.find("其中：自然人") > -1:
-                    continue
+            if sheet.cell(row, 2).value.find("其中：自然人") > -1:
+                continue
 
-                if sheet.cell(row, 2).value.find("非自然人") > -1:
-                    continue
-                if sheet.cell(row, 2).value.find("全额上网") > -1:
-                    continue
-                if sheet.cell(row, 2).value.find("其中：自然人") > -1:
-                    continue
-                if sheet.cell(row, 2).value.find("非自然人") > -1:
-                    continue
-                # 检查税率
-                judge_tax_rate_and_unit_price(sheet, row, 8, shui_lv_list, counter, workbook, route)
-                # 检查单价
-                judge_tax_rate_and_unit_price(sheet, row, 14, dan_jia_list, counter, workbook, route)
+            if sheet.cell(row, 2).value.find("非自然人") > -1:
+                continue
+            if sheet.cell(row, 2).value.find("全额上网") > -1:
+                continue
+            if sheet.cell(row, 2).value.find("其中：自然人") > -1:
+                continue
+            if sheet.cell(row, 2).value.find("非自然人") > -1:
+                continue
+            # 检查税率
+            judge_tax_rate_and_unit_price(sheet, row, 8, shui_lv_list, counter, workbook, route)
+            # 检查单价
+            judge_tax_rate_and_unit_price(sheet, row, 14, dan_jia_list, counter, workbook, route)
 
-                # 判断下一行是不是全额上网
-                cell_2 = sheet.cell(row + 1, 2)
-                if cell_2.value == "8.其他能源含从公司系统外购电":
-                    row_status.status = "None"
-                    continue
-                pass
+            # 判断下一行是不是全额上网
+            cell_2 = sheet.cell(row + 1, 2)
+            if cell_2.value == "8.其他能源含从公司系统外购电":
+                row_status.status = "None"
+                continue
+            pass
 
-            case "从省级以下电网企业购电":
-                # 检查税率
-                judge_tax_rate_and_unit_price(sheet, row, 8, shui_lv_list, counter, workbook, route)
-                cell_2 = sheet.cell(row + 1, 2)
-                if cell_2.value.find("从系统内发电企业购电含抽水蓄能") > -1:
-                    row_status.status = "None"
-                    continue
-                pass
+        elif row_status.status == "从省级以下电网企业购电":
+            # 检查税率
+            judge_tax_rate_and_unit_price(sheet, row, 8, shui_lv_list, counter, workbook, route)
+            cell_2 = sheet.cell(row + 1, 2)
+            if cell_2.value.find("从系统内发电企业购电含抽水蓄能") > -1:
+                row_status.status = "None"
+                continue
+            pass
     workbook.save(route)
     workbook.close()
     pass

@@ -30,8 +30,7 @@ def get_letter_order(letter):
         return None
 
 
-# pyinstaller --name "二级市场购售电力销售CheckV1.0" --onefile
-# --hidden-import=openpyxl --hidden-import=wx --add-data="./report/check.py;./report/" ./MainWindow/MainWindow.py
+# pyinstaller --name "二级市场购售电力销售CheckV1.0" --onefile--hidden-import=openpyxl --hidden-import=wx --add-data="./report/check.py;./report/" ./MainWindow/MainWindow.py
 if __name__ == '__main__':
     excel_list_file = [1, 2, "3"]
     print(format_string("Full internet access"))
